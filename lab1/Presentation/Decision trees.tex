@@ -1,0 +1,97 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+
+\usepackage{graphicx}
+\usepackage{biblatex}
+\usepackage[justification=centering]{caption}
+\usepackage{array}
+\usepackage{hhline}
+
+
+
+\usetheme{Madrid}
+\usecolortheme{beaver}
+
+\setlength\extrarowheight{7pt}
+
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+
+
+\usefonttheme[onlymath]{serif}
+\renewcommand*{\bibfont}{\scriptsize}
+%\addbibresource{bib_rossler.bib}
+
+
+\setbeamertemplate{footline}[frame number]{}
+
+%gets rid of bottom navigation symbols
+\setbeamertemplate{navigation symbols}{}
+
+%gets rid of footer
+%will override 'frame number' instruction above
+%comment out to revert to previous/default definitions
+\setbeamertemplate{footline}{}
+
+\title{\huge Decision trees}
+\date{}
+\author{\large Mihaela Stoychev \& Antonio Matosevic}
+\institute{ DD2421 Machine Learning, KTH}
+\titlegraphic{\includegraphics[scale=0.04]{KTH_logo}}
+
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}{Assignment 0}
+Which problem is the most difficult to learn?
+\begin{itemize}
+\item MONK-3 is defined by the simplest set of rules, but it includes 5$\%$ noise. If the goal of learning is to obtain a tree with the best generalization properties, overfitting a noise might be a problem.
+\item MONK-1 is somewhat more complicated, while MONK-2 is defined by the most complicated set of rules (due to many possibilities for $a_i = a_j$, $ i \neq j, i,j \in \{k\}_{k = 1}^6$ resulting in a possibly complex structure) and neither of them includes noise. MONK-2 training set is a bit larger than other two which might help, but not significantly.
+\item Our guess: MONK-2.
+\end{itemize} 
+
+\end{frame}
+
+
+\begin{frame}{Assignment 1}
+What are the entropies of the given datasets?\\[5mm]
+\begin{table}[H]
+\begin{tabular}{|P{30mm}|P{30mm}|}
+\hline
+\textbf{Dataset} & \textbf{Entropy} \\ \hhline{|=|=|}
+MONK-1           & 1.0000           \\ \hline
+MONK-2           & 0.9571           \\ \hline
+MONK-3           & 0.9998           \\ \hline
+\end{tabular}
+\end{table}
+
+\end{frame}
+
+
+\begin{frame}{Assignment 2}
+Entropies of uniform and non-uniform distributions.\\
+Generally, entropy equals $E = - \sum\limits_i p_i \log_2 p_i$, where $\sum \limits_i p_i = 1$.\\
+\textbf{Uniform}
+\begin{itemize}
+\item For a discrete uniform distribution, we have that $p_i = p_j (= p), \forall i, j$. Also, if there are $n$ outcomes, $p = \frac{1}{n}$ yielding $$E = - \sum \limits_i p_i \log_2 p_i = - n \frac{1}{n}\log_2 \frac{1}{n} =  \log_2 n.$$
+
+\item Example: Tossing a fair die, $E = \log_2 6 \approx 2.584.$
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\textbf{Non-uniform}
+\begin{itemize}
+\item Uniform distribution on a finite set $\{x_1, \dots, x_n \}$ is the maximum entropy distribution among all discrete distributions supported on this set. (Proof is trivial and left to the reader.)
+\item Entropy is expected amount of information from an event ("measure of uncertaingy"). The larger it is, the more information we get by observing an outcome ("the more uncertain we are about the possible outcome").
+\item Example: An extreme case when one side of a die has probability of 1 and others 0. Then $$E = -\sum\limits_i p_i \log_2 p_i = - 1\log_2 1 = 0, $$ meaning that no information is obtained when observing one (no uncertainty about the outcome). On the contrary, observe the outcome of a variable with uniform distribution is very informative (large uncertainty, everything is equally probable).
+\end{itemize}
+\end{frame}
+
+
+
+\end{document}
